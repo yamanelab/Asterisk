@@ -1,6 +1,6 @@
 <?php
 
-const JSON_PATH = "memberData.json";
+const JSON_PATH = "member_data.json";
 
 class Model
 {
