@@ -2,15 +2,14 @@
 
 const JSON_PATH = "member_data.json";
 
-//指定したidのstatusのみ変更できるようにしたい
 $id = $_POST["id"];
 
 $json = json_decode(file_get_contents(JSON_PATH));
 
-if( $json->member->status == "home") {
-	$json->member->status = "lab";
+if( $json->member->$id->status == "home") {
+	$json->member->$id->status = "lab";
 } else {
-	$json->member->status = "home";
+	$json->member->$id->status = "home";
 }
 
 file_put_contents(JSON_PATH, json_encode($json)); 

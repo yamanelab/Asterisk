@@ -27,18 +27,18 @@
         <div class="member-holder member-holder-top member-holder-left">
         	<div class="member-view member-choice-state-home-color">
 				<div class="member-state">
-					<span><?php getNameAndStatus($members[0]); ?></span>
+					<span><?php getNameAndStatus($members[1]); ?></span>
 				</div>
 				<div class="member-field">
-						<img width="80px" height="40px" border="0px" src=<?php getImage($members[0]); ?> />
+						<img width="80px" height="40px" border="0px" src=<?php getImage($members[1]); ?> />
 					<div class="member-info">
-						<span><?php getMemo($members[0]); ?></span>
+						<span><?php getMemo($members[1]); ?></span>
 					</div>
 				</div>
 				
 				<br>
 				<form method="post" action="jsonEdit.php">
-					<input type="hidden" name="id" value="id">
+					<input type="hidden" name="id" value="khattori">
 					<input type="submit" value="change">
 				</form>
 				
