@@ -84,7 +84,7 @@ class Member
     public $status;
     public $modified_date;
 
-    function __construct($_id, $_name, $_image, $_comment, $_status, $_modified_date) {
+    function __construct($_id = "", $_name = "", $_image = "", $_comment = "", $_status = "", $_modified_date = "") {
         $this->id = $_id;
         $this->name = $_name;
         $this->image = $_image;
