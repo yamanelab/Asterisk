@@ -5,37 +5,11 @@ const JSON_PATH = "member_data.json";
 class Model
 {
     private $database;
-    private $ids;
+    private $ids = array();
 
     function __construct() {
-        // 手で作る
-        /*$this->database = new Database();
-        $this->database->member = array(
-            "hamayan" => new Member("hamayan", "濱屋光喜", "image", "コメント", "在席", "1993/04/24 00:00:00")
-        );
-		$this->saveJson();*/
-
-        // jsonで読む
-        $lowData = file_get_contents(JSON_PATH);
-        $_members = json_decode($lowData)->member;
-
-        $this->database = new Database();
-        $this->database->member = array();
-        foreach($_members as $member) {
-            $this->database->member[$member->id] = new Member(
-                $member->id,
-                $member->name,
-                $member->image,
-                $member->comment,
-                $member->status,
-                $member->modified_date
-            );
-        }
-
-        $this->ids = array();
-        foreach($this->database->member as $member) {
-            $this->ids[] = $member->id;
-        }
+        $database = new Database();
+        $this->loadJson();
     }
 
     public function getMemberList()
@@ -63,6 +37,31 @@ class Model
         $this->saveJson();
     }
 
+    function loadJson() {
+        // ファイルが無いなら、ロードしない
+        if(!file_exists(JSON_PATH)) return;
+
+        // jsonロード
+        $lowData = file_get_contents(JSON_PATH);
+        $_members = json_decode($lowData)->member;
+
+        $this->database = new Database();
+        foreach($_members as $member) {
+            $this->database->member[$member->id] = new Member(
+                $member->id,
+                $member->name,
+                $member->image,
+                $member->comment,
+                $member->status,
+                $member->modified_date
+            );
+        }
+
+        foreach($this->database->member as $member) {
+            $this->ids[] = $member->id;
+        }
+    }
+
     function saveJson() {
         $fp = fopen(JSON_PATH, "w");
         fwrite($fp, json_encode($this->database));
@@ -72,7 +71,7 @@ class Model
 
 class DataBase
 {
-	public $member;
+	public $member = array();
 }
 
 class Member
