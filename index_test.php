@@ -15,39 +15,24 @@
   				});
 			});
 		</script>			
-	    <?php
-	    	include "index.php";
-	    ?>
 	</head>
 	<body>
 		<div id="header">
 			<span><f1>CSL Members</f1></span>
 		</div>
- 		
-        <div class="member-holder member-holder-top member-holder-left">
-        	<div class="member-view member-choice-state-home-color">
-				<div class="member-state">
-					<span><?php getNameAndStatus($members[0]); ?></span>
-				</div>
-				<div class="member-field">
-						<img width="80px" height="40px" border="0px" src=<?php getImage($members[0]); ?> />
-					<div class="member-info">
-						<span><?php getMemo($members[0]); ?></span>
-					</div>
-				</div>
-				
-				<br>
-				<form method="post" action="jsonEdit.php">
-					<input type="hidden" name="id" value="id">
-					<input type="submit" value="change">
-				</form>
-				
-				<br>
-				<button id="get_json">JSON読み込み</button>
-				<div id="result"></div>
-			</div>
-		</div>
+
+	    <table id="member" class="member-table">
+    	<?php
+    		include "index.php";
+    		getAllMembersTable($members, 4);
+    	?>      					
+		</table>
 		
+		<br><br>
+		<div id="footer">
+			<span><button id="get_json">JSON読み込み</button></span>
+			<div id="result"></div>
+		</div>
 		
 	</body>
 </html>
