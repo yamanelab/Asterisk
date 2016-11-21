@@ -6,7 +6,7 @@ if(isset($_POST['id'])) {
 	
 	$model = new Model();
 
-	if($_POST['type'] === "add") {
+	if(isset($_POST['add'])) {
 		$m = new Member();
 
 		$m->id = $_POST['id'];
@@ -14,10 +14,10 @@ if(isset($_POST['id'])) {
 		$m->image = $_POST['image'];
 		$m->comment = $_POST['comment'];
 		$m->status = $_POST['status'];
-		$m->modified_date = $_POST['modified_date'];
+		$m->modified_date = date('Y/m/d H:i:s');
 
 		$model->addMember($m->id, $m);
-	} elseif ($_POST['type'] === "delete") {
+	} elseif (isset($_POST['del'])) {
 		$model->removeMember($_POST['id']);
 	}
 }
@@ -44,35 +44,54 @@ if(isset($_POST['id'])) {
 	foreach($ids as $id) {
 		$m = $model->getMemberDetail($id);
 echo <<< EOT
-		<tr>
+		<tr> <form action="member_manager.php", method="post">
 		<td>$m->id</td>
-		<td>$m->name</td>
-		<td>$m->image</td>
-		<td>$m->comment</td>
-		<td>$m->status</td>
+		<td><input type="text" name="name" value="$m->name"></td>
+		<td><input type="text" name="image" value="$m->image"></td>
+		<td><input type="text" name="comment" value="$m->comment"></td>
+		<td><select name="status">
+EOT;
+		$labels = array();
+		$labels[] = "home";
+		$labels[] = "campus";
+		$labels[] = "lab";
+		foreach($labels as $label) {
+			if($label === $m->status) {
+				echo '<option selected="selected">';
+				echo $label;
+				echo "</option>";
+			} else {
+				echo "<option>$label</option>";
+			}
+		}
+
+echo <<< EOT
+		</select></td>
 		<td>$m->modified_date</td>
 		<td>
-			<form action="member_manager.php", method="post">
-				<input type="hidden" name="id" value="$m->id">
-				<input type="hidden" name="type" value="delete">
-				<input type="submit" value="消す">
-			</form>
+			<input type="submit" value="変更" name="add">
+			<input type="submit" value="消す" name="del">
+			
 		</td>
-		</tr>
+		</form> </tr>
 EOT;
 	}
 	?>
 </table>
 <br>
 <form action="member_manager.php", method="post">
-<input type="hidden" name="type" value="add">
-ID : <input type="text" name="id"><br>
-名前 : <input type="text" name="name"><br>
-画像URL : <input type="text" name="image"><br>
-コメント : <input type="text" name="comment"><br>
-状態 : <input type="text" name="status"><br>
-変更日 : <input type="text" name="modified_date"><br>
-<input type="submit" value="更新・追加">
+	<input type="hidden" name="type" value="add">
+	ID : <input type="text" name="id"><br>
+	名前 : <input type="text" name="name"><br>
+	画像URL : <input type="text" name="image"><br>
+	コメント : <input type="text" name="comment"><br>
+	状態 : 
+	<select name="status">
+		<option>home</option>
+		<option>campus</option>
+	    <option>lab</option>
+	</select><br>
+	<input type="submit" value="追加" name="add">
 </form>
 
 </body>
