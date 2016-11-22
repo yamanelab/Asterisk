@@ -6,8 +6,6 @@
 }
 
 body {
-  width: 1024px;
-  height: 600px;
   padding: 0;
   margin: 0;
 }
@@ -32,19 +30,19 @@ body {
   font-size: large;
 }
 
+/* table */
+.member-table {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* holder */
 .member-holder {
   margin-top: 20px;
-  margin-left: 50px;
+  margin-right: 20px;
+  margin-left: 20px;
   position: relative;
   padding: 0px;
-}
-.member-holder-top {
-  margin-top: 0px;
-}
-.member-holder-left {
-  margin-left: 60px;
 }
 
 /* view */
@@ -89,159 +87,18 @@ body {
   font-size: small;
 }
 
-/* choice field */
-.member-choice-state-lab ,
-.member-choice-state-campus ,
-.member-choice-state-out ,
-.member-choice-state-home ,
-.member-choice-state-lecture ,
-.member-choice-state-meal {
-  width: 75px;
-  height: 50px;
-  text-align: center;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  position: absolute;
-  display: none;
-}
-.member-choice-state-lab > span ,
-.member-choice-state-campus > span ,
-.member-choice-state-out > span ,
-.member-choice-state-home > span ,
-.member-choice-state-lecture > span ,
-.member-choice-state-meal > span {
-  display: inline-block;
-  width: 65px;
-  height: 40px;
-  margin: 5px;
-  line-height: 40px; 
-  font-size: x-large;
-  background-color: white;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-.member-choice-state-lab {
-  transform-origin: left top;
-  transform: rotate(-90deg);
-  -moz-transform-origin: left top;
-  -moz-transform: rotate(-90deg);
-  -webkit-transform-origin: left top;
-  -webkit-transform: rotate(-90deg);
-}
-.member-choice-state-home {
-  transform-origin: left top;
-  transform: rotate(90deg);
-  -moz-transform-origin: left top;
-  -moz-transform: rotate(90deg);
-  -webkit-transform-origin: left top;
-  -webkit-transform: rotate(90deg);
-}
-
-/* choice field active */
-.member-active .member-choice-state-lab ,
-.member-active .member-choice-state-campus ,
-.member-active .member-choice-state-out ,
-.member-active .member-choice-state-home ,
-.member-active .member-choice-state-lecture ,
-.member-active .member-choice-state-meal {
-  display: block;
-  z-index: 100;
-}
-
-/* choice field position */
-.member-choice-state-lab {
-  top: 88px;
-  left: -60px;
-}
-.member-choice-state-campus {
-  top: -60px;
-  left: 0px;
-}
-.member-choice-state-out {
-  top: -60px;
-  left: 105px;
-}
-.member-choice-state-home {
-  top: 13px;
-  left: 240px;
-}
-.member-choice-state-lecture {
-  top: 110px;
-  left: 0px;
-}
-.member-choice-state-meal {
-  top: 110px;
-  left: 105px;
-}
-
-/* choice field pickup */
-.member-choice-state-lab:after ,
-.member-choice-state-campus:after ,
-.member-choice-state-out:after ,
-.member-choice-state-home:after ,
-.member-choice-state-lecture:after ,
-.member-choice-state-meal:after {
-  content: ' ';
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  border: 10px solid transparent;
-}
-.member-choice-state-lab:after ,
-.member-choice-state-campus:after ,
-.member-choice-state-out:after ,
-.member-choice-state-home:after {
-  top: 100%;
-  left: 10px;
-}
-.member-choice-state-lecture:after ,
-.member-choice-state-meal:after {
-  bottom: 100%;
-  right: 10px;
-}
-
-/* choice field color */
-.member-choice-state-lab-color {
+/* state color */
+.lab-color {
   background-color: #00CC00;
 }
-.member-choice-state-lab:after {
-  border-top-color: #00CC00;
-}
-.member-choice-state-campus-color {
+.campus-color {
   background-color: #FF8C00;
 }
-.member-choice-state-campus:after {
-  border-top-color: #FF8C00;
-}
-.member-choice-state-out-color {
-  background-color: #B0C4DE;
-}
-.member-choice-state-out:after {
-  border-top-color: #B0C4DE;
-}
-.member-choice-state-home-color {
+.home-color {
   background-color: #A9A9A9;
-}
-.member-choice-state-home:after {
-  border-top-color: #A9A9A9;
-}
-.member-choice-state-lecture-color {
-  background-color: #FF8C00;
-}
-.member-choice-state-lecture:after {
-  border-bottom-color: #FF8C00;
-}
-.member-choice-state-meal-color {
-  background-color: #FF8C00;
-}
-.member-choice-state-meal:after {
-  border-bottom-color: #FF8C00;
 }
 
 /* long absence */
 .non-update > .member-view {
   color: #DC143C;
 }
-
