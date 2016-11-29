@@ -94,5 +94,7 @@ EOT;
 	<input type="submit" value="追加" name="add">
 </form>
 
+<a href="index.php">トップへ戻る</a>
+
 </body>
 </html>
