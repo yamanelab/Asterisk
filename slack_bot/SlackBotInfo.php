@@ -1,6 +1,7 @@
 <?php
 
-const JSON_PATH = "../member_data.json";
+/** slack.jsonのパス指定 */
+define("SLACK_JSON_PATH",  __DIR__.'/slack.json');
 
 /**
  * Slackへのポスト情報を担うクラス
@@ -18,7 +19,7 @@ class SlackBotInfo
      */
     public function __construct($message = '')
     {
-        $json = json_decode(file_get_contents(JSON_PATH));
+        $json = json_decode(file_get_contents(SLACK_JSON_PATH));
 
         if( $json->slack_bot->enable ) {
             $this->set_param($json);

@@ -3,11 +3,13 @@
 include_once __DIR__.'/SlackBot.php';
 include_once __DIR__.'/SlackBotInfo.php';
 
-// 引数チェック
-if ($argc < 2) {
+if ($argc < 3) {
     exit('引数にポストしたいメッセージを指定してください');
 }
-$message = $argv[1];
+$name   = $argv[1];
+$status = $argv[2];
+
+$message = $name."の状態が".$status."に変更されました";
 
 // メッセージをポスト
 $bot = new SlackBot();
