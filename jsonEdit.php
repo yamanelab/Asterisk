@@ -1,30 +1,72 @@
 <?php
+
 date_default_timezone_set('Asia/Tokyo');
 
-const JSON_PATH = "member_data.json";
+const MEMBER_JSON_PATH = "./member_data.json";
+const SLACK_JSON_PATH  = "./slack_bot/slack.json";
 
 $id = $_POST["id"];
 
-$json = json_decode(file_get_contents(JSON_PATH));
+$member_json = json_decode(file_get_contents(MEMBER_JSON_PATH));
+$slack_json  = json_decode(file_get_contents(SLACK_JSON_PATH));
 
+$member = $member_json->member->$id;
+
+// メンバー画像がクリックされた場合
 if( isset($_POST['submit_x']) & isset($_POST['submit_y']) ) {
-	if( $json->member->$id->status == "campus" ) {
-		$json->member->$id->status = "lab";
+	if( check_status($member, "campus") ) {
+		change_status($member, $slack_json, "lab");
 	} else {
-		$json->member->$id->status = "campus";
+		change_status($member, $slack_json, "campus");
 	}
-} else if ( $json->member->$id->status == "home" ) {
-	$json->member->$id->status = "lab";
+}
+// メンバーの一言メモがクリックされた場合
+else if ( check_status($member, "home") ) {
+	change_status($member, $slack_json, "lab");
 } else {
-	$json->member->$id->status = "home";
+	change_status($member, $slack_json, "home");
 }
 
-$json->member->$id->modified_date = date("Y/m/d H:i:s");
+$member->modified_date = date("Y/m/d H:i:s");
 
-file_put_contents(JSON_PATH, json_encode($json)); 
+file_put_contents(MEMBER_JSON_PATH, json_encode($member_json)); 
 
 $uri = $_SERVER['HTTP_REFERER'];
 header("Location: ".$uri, true, 303);
+
+/**
+ * $idのメンバーのステータスが$statusと同じかチェック 
+ */
+function check_status($member, $status) 
+{
+	return $member->status == $status;
+}
+
+/**
+ * $idのメンバーのステータスを$statusに変更
+ */
+function change_status($member, $slack_json, $status) 
+{
+	$member->status = $status;
+
+	// slackの設定をしていない場合は何もしない
+	post2slack($member, $slack_json);
+}
+
+/**
+ * slack_botの設定していれば、botによる通知を行う
+ */
+function post2slack($member, $slack_json) 
+{
+	if( $slack_json->slack_bot->enable ) 
+	{
+		$name 	= $member->name;
+		$status = $member->status;
+
+		$cmd = "php ./slack_bot/post2slack.php ".$name." ".$status;
+		exec($cmd);
+	}
+}
 
 ?>
 

@@ -1,0 +1,10 @@
+{
+	"slack_bot":
+	{
+		"enable":"true",
+		"channel":"#general",
+		"username":"Asterisk",
+		"icon_emoji":":ghost:",
+		"url":"https://hooks.slack.com/services/XXXXXXXXXXXXXX"
+	}
+}
