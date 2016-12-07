@@ -1,5 +1,15 @@
 <?php
-include "model.php";
+
+require_once('./model.php');
+require_once('./login.php');
+
+
+$manager = new LoginManager();
+if(!$manager->isLogined()) {
+	$url = './member_login.php';
+	header("Location: $url");
+}
+
 
 // POST処理が来たときは更新処理
 if(isset($_POST['id'])) {
@@ -94,6 +104,7 @@ EOT;
 	<input type="submit" value="追加" name="add">
 </form>
 
+<a href="member_logout.php">ログアウトする</a><br>
 <a href="index.php">トップへ戻る</a>
 
 </body>
