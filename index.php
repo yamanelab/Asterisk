@@ -10,7 +10,10 @@
 
         <table id="member" class="member-table">
         <?php
-            include "member_box.php";
+            include 'member_box.php';
+
+            update($members, $model);
+
             getAllMembersTable($members, 4);
         ?>                          
         </table>

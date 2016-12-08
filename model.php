@@ -53,7 +53,9 @@ class Model
                 $member->image,
                 $member->comment,
                 $member->status,
-                $member->modified_date
+                $member->modified_date,
+                $member->class,
+                $member->count
             );
         }
 
@@ -82,17 +84,21 @@ class Member
     public $comment;
     public $status;
     public $modified_date;
+    public $class;
+    public $count;
 
-    function __construct($_id = "", $_name = "", $_image = "", $_comment = "", $_status = "", $_modified_date = "") {
+    function __construct($_id = "", $_name = "", $_image = "", $_comment = "", $_status = "", $_modified_date = "", $_class = "", $_count = "") {
         $this->id = $_id;
         $this->name = $_name;
         $this->image = $_image;
         $this->comment = $_comment;
         $this->status = $_status;
         $this->modified_date = $_modified_date;
+        $this->class = $_class;
+        $this->count = $_count;
     }
 
     function __toString() {
-        return "Member { $this->id, $this->name, $this->image, $this->comment, $this->status, $this->modified_date }";
+        return "Member { $this->id, $this->name, $this->image, $this->comment, $this->status, $this->modified_date, $this->class, $this->count }";
     }
 }

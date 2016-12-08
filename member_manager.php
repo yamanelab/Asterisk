@@ -25,6 +25,8 @@ if(isset($_POST['id'])) {
 		$m->comment = $_POST['comment'];
 		$m->status = $_POST['status'];
 		$m->modified_date = date('Y/m/d H:i:s');
+		$m->class = 'normal';
+		$m->count = 0;
 
 		$model->addMember($m->id, $m);
 	} elseif (isset($_POST['del'])) {
@@ -45,6 +47,8 @@ if(isset($_POST['id'])) {
 		<td>コメント</td>
 		<td>状態</td>
 		<td>変更日</td>
+		<td>クラス</td>
+		<td>今月出勤数</td>
 		<td>消す</td>
 	</tr>
 
@@ -78,6 +82,8 @@ EOT;
 echo <<< EOT
 		</select></td>
 		<td>$m->modified_date</td>
+		<td>$m->class</td>
+		<td>$m->count</td>
 		<td>
 			<input type="submit" value="変更" name="add">
 			<input type="submit" value="消す" name="del">
