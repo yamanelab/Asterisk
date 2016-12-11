@@ -34,6 +34,7 @@ file_put_contents(MEMBER_JSON_PATH, json_encode($member_json));
 $uri = $_SERVER['HTTP_REFERER'];
 header("Location: ".$uri, true, 303);
 
+
 /**
  * $idのメンバーのステータスが$statusと同じかチェック 
  */
@@ -68,8 +69,9 @@ function post2slack($member, $slack_json)
 	{
 		$name 	= $member->name;
 		$status = $member->status;
+		$count  = $member->count;
 
-		$cmd = "php ./slack_bot/post2slack.php ".$name." ".$status;
+		$cmd = "php ./slack_bot/post2slack.php ".$name." ".$status." ".$count;
 		exec($cmd);
 	}
 }
