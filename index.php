@@ -17,7 +17,7 @@
         
         <br><br>        
         <div id="footer">
-            <form method="post" action="member_manager.php">
+            <form method="post" action="member/manager.php">
                 <input type="submit" value="メンバー管理画面"> 
             </form>
         </div>

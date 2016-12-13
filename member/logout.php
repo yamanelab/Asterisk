@@ -1,6 +1,6 @@
 <?php
 
-require_once('./login.php');
+require_once('./login_manager.php');
 $manager = new LoginManager();
 $manager->logout();
 
@@ -11,7 +11,7 @@ $manager->logout();
 <body>
 ログアウトしました<br>
 
-<a href="index.php">トップへ戻る</a>
+<a href="../index.php">トップへ戻る</a>
 
 </body>
 </html>

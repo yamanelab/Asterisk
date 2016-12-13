@@ -1,12 +1,12 @@
 <?php
 
-require_once('./model.php');
-require_once('./login.php');
+require_once('../model.php');
+require_once('./login_manager.php');
 
 
 $manager = new LoginManager();
 if(!$manager->isLogined()) {
-	$url = './member_login.php';
+	$url = './login.php';
 	header("Location: $url");
 }
 
@@ -54,7 +54,7 @@ if(isset($_POST['id'])) {
 	foreach($ids as $id) {
 		$m = $model->getMemberDetail($id);
 echo <<< EOT
-		<tr> <form action="member_manager.php", method="post">
+		<tr> <form action="manager.php", method="post">
 		<td>$m->id</td>
 		<td><input type="text" name="name" value="$m->name"></td>
 		<td><input type="text" name="image" value="$m->image"></td>
@@ -89,7 +89,7 @@ EOT;
 	?>
 </table>
 <br>
-<form action="member_manager.php", method="post">
+<form action="manager.php", method="post">
 	<input type="hidden" name="type" value="add">
 	ID : <input type="text" name="id"><br>
 	名前 : <input type="text" name="name"><br>
@@ -104,8 +104,8 @@ EOT;
 	<input type="submit" value="追加" name="add">
 </form>
 
-<a href="member_logout.php">ログアウトする</a><br>
-<a href="index.php">トップへ戻る</a>
+<a href="logout.php">ログアウトする</a><br>
+<a href="../index.php">トップへ戻る</a>
 
 </body>
 </html>
