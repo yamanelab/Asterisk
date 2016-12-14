@@ -1,6 +1,6 @@
 <?php
 
-require_once('./login.php');
+require_once('./login_manager.php');
 $manager = new LoginManager();
 
 $msg = "";
@@ -18,7 +18,7 @@ if(isset($_POST['id'])) {
 }
 
 if($manager->isLogined()) {
-	$url = './member_manager.php';
+	$url = './manager.php';
 	header("Location: $url");
 }
 
@@ -54,7 +54,7 @@ if($manager->isLogined()) {
 
 <div class="login-box">
 <?php echo $msg . '<br>'; ?>
-<form action="member_login.php", method="post">
+<form action="login.php", method="post">
 	  ID <input type="text" name="id"><br>
 	PASS <input type="password" name="pass"><br>
 	<input type="submit" value="ログイン">
