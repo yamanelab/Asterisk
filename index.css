@@ -1,8 +1,8 @@
 * {
-  user-select: none;
   -ms-user-select: none;
   -moz-user-select:none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -50,9 +50,9 @@ body {
   width: 180px;
   height: 100px;
   text-align: center;
-  border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 /* state & field */
@@ -72,12 +72,12 @@ body {
   width: 170px;
   text-align: center;
   background-color: white;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   -moz-border-bottom-left-radius: 5px;
   -moz-border-bottom-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .member-field > img {
   margin-top: 5px;
@@ -96,6 +96,25 @@ body {
 }
 .home-color {
   background-color: #A9A9A9;
+}
+
+/* text color for gold or silver class */
+.lab-status {
+  color: #00A000;
+}
+.campus-status {
+  color: #AA3300;
+}
+.home-status {
+  color: #888888;
+}
+
+/* class color */
+.gold-class {
+  background: linear-gradient(to bottom right, #F7DE05, #DA8E00, #EDAC06, #F7DE05, #ECB802, #DAAF08, #B67B03);
+}
+.silver-class {
+  background: linear-gradient(to bottom right, #E8E8E8, #A5A5A5, #BABAC2, #E8E8E8, #A5A5A5, #BABAC2);
 }
 
 /* long absence */

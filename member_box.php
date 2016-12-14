@@ -2,6 +2,7 @@
 date_default_timezone_set('Asia/Tokyo');
 
 include "model.php";
+const DATE_JSON = "./date.json";
 
 $members = array();
 
@@ -25,11 +26,15 @@ function checkUpdate($member) {
 function getMemberBox($member) {
     echo "\t\t<td>\n";
     if (checkUpdate($member)) {
-        echo    "\t\t<div class=\"member-holder\">\n";
+        echo "\t\t<div class=\"member-holder\">\n";
     } else {
         echo "\t\t<div class=\"member-holder non-update\">\n";
     }
-    echo    "\t\t\t<div class=\"member-view ".$member->status."-color\">\n";
+    if ($member->class == normal) {
+        echo "\t\t\t<div class=\"member-view ".$member->status."-color\" >\n";
+    } else {
+        echo "\t\t\t<div class=\"member-view ".$member->status."-status ".$member->class."-class\" >\n";
+    }
     echo "\t\t\t\t<div class=\"member-state\">\n";
     echo "\t\t\t\t\t\t<span>".$member->name."@".$member->status."</span>\n";
     echo "\t\t\t\t</div>\n";
@@ -59,6 +64,33 @@ function getAllMembersTable($members, $border) {
         if ($count % $border == 0)  echo "\t\t</tr><tr>\n";
     }    
     echo "\t\t</tr>";
+}
+
+/**
+ * 1ヶ月ごとにメンバーのクラスを更新し、出勤数をリセット
+ */
+function update($members, $model)
+{
+    $date_json = json_decode(file_get_contents(DATE_JSON));
+
+    if( $date_json->month != date('m') ) {
+        $date_json->month = date('m');
+
+        foreach( $members as $member ) {
+            if( $member->count >= 20 ) {
+                $member->class = "gold";
+            } elseif ( $member->count >= 10 ) {
+                $member->class = "silver";
+            } else {
+                $member->class = "normal";
+            }
+            $member->count = 0;
+
+            $model->updateMember($member->id, $member);
+        }
+
+        file_put_contents(DATE_JSON, json_encode($date_json));
+    }
 }
 
 ?>
