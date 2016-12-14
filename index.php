@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="header">
-            <span><f1>CSL Members</f1></span>
+            <span><f1>Members</f1></span>
         </div>
 
         <table id="member" class="member-table">

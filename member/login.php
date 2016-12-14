@@ -59,7 +59,7 @@ if($manager->isLogined()) {
 	PASS <input type="password" name="pass"><br>
 	<input type="submit" value="ログイン">
 </form>
-<a href="index.php">トップへ戻る</a>
+<a href="../index.php">トップへ戻る</a>
 </div>
 
 

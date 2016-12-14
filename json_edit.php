@@ -2,7 +2,7 @@
 
 date_default_timezone_set('Asia/Tokyo');
 
-const MEMBER_JSON_PATH = "./member_data.json";
+const MEMBER_JSON_PATH = "./data/member_data.json";
 const SLACK_JSON_PATH  = "./slack_bot/slack.json";
 
 $id = $_POST["id"];
