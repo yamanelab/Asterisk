@@ -1,7 +1,7 @@
 {
 	"slack_bot":
 	{
-		"enable":"true",
+		"enable":false,
 		"channel":"#general",
 		"username":"Asterisk",
 		"icon_emoji":":ghost:",

@@ -31,7 +31,7 @@ if(isset($_POST['id'])) {
 <form action="make_hash.php", method="post">
 	  ID <input type="text" name="id"><br>
 	PASS <input type="password" name="pass"><br>
-	<input type="submit" value="ハッシュ作成！">
+	<input type="submit" value="make hash !">
 </form>
 
 </body>

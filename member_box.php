@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Tokyo');
 
 include "model.php";
-const DATE_JSON = "./date.json";
+const DATE_JSON = "./data/date.json";
 
 $members = array();
 
@@ -39,7 +39,7 @@ function getMemberBox($member) {
     echo "\t\t\t\t\t\t<span>".$member->name."@".$member->status."</span>\n";
     echo "\t\t\t\t</div>\n";
     echo "\t\t\t\t<div class=\"member-field\">\n";
-    echo "\t\t\t\t\t\t<form method=\"post\" action=\"jsonEdit.php\">\n";
+    echo "\t\t\t\t\t\t<form method=\"post\" action=\"json_edit.php\">\n";
     echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$member->id."\" >\n";
     echo "\t\t\t\t\t\t\t<input type=\"image\" name=\"submit\" width=\"80px\" height=\"40px\" style=\"border:solid 5px #FFFFFF\" src=\"".$member->image."\" >\n";
     echo "\t\t\t\t\t\t\t<div class=\"member-info\">\n";

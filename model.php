@@ -1,6 +1,6 @@
 <?php
 
-define("JSON_PATH", dirname(__FILE__) . "/member_data.json");
+define("JSON_PATH", dirname(__FILE__) . "/data/member_data.json");
 
 class Model
 {
