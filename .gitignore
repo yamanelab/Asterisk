@@ -2,3 +2,8 @@ member_data.json
 slack_bot/slack.json
 data/*
 !.gitkeep
+NfcClientForAsterisk/Debug/
+NfcClientForAsterisk/NfcClientForAsterisk.vcxproj.filters
+*.suo
+*.VC.VC.opendb
+NfcClientForAsterisk/NfcClientForAsterisk.VC.db
