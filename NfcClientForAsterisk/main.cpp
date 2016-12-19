@@ -2,96 +2,100 @@
 #include <cstdlib>
 
 #include "FelicaWrapper.h"
+#include "CardManager.h"
+#include "HttpWrapper.h"
+#include "Config.h"
 
-int main(void);
-void error_routine(void);
-void print_vector(char* title, unsigned char* vector, int length);
+FelicaWrapper felica;
+CardManager cardManager;
+HttpWrapper httpWrapper;
 
-
-
-int main_loop() {
-	structure_polling polling;
-	unsigned char system_code[2] = { 0xFF, 0xFF };
-	polling.system_code = system_code;
-	polling.time_slot = 0x00;
-
-	unsigned char number_of_cards = 0;
-
-	structure_card_information card_information;
-	unsigned char card_idm[8];
-	unsigned char card_pmm[8];
-	card_information.card_idm = card_idm;
-	card_information.card_pmm = card_pmm;
-
-	unsigned long timeout;
-	get_polling_timeout(&timeout);
-	printf("timeout: %lu\r\n", timeout);
-	timeout = 2000;
-	set_polling_timeout(timeout);
-
-	int cnt = 1;
+// カードによる入退室管理
+void waitCardTouch() {
+	string IDm = "", PMm = "";
+	string pIDm = "", pPMm = "";
 	while (1) {
-		printf("%d\n", cnt);
-		bool ok = polling_and_get_card_information(&polling, &number_of_cards, &card_information);
-		if (ok) {
-			print_vector("card IDm:", card_idm, sizeof(card_idm));
-			print_vector("card PMm:", card_pmm, sizeof(card_pmm));
+		printf("Waiting Your Card Touch...\n");
+
+		// カードタッチがあるまで待つ
+		while (felica.GetResource(IDm, PMm, 100) < 0) continue;
+		
+		printf("Touched!!\n");
+		pIDm = IDm;
+		pPMm = PMm;
+
+		// 状態変更処理
+		string id = cardManager.GetIdFromCard(IDm, PMm);
+		if (id != "") {
+			printf("Hi, %s\n", id.c_str());
+			string url = ASTERISK_URL;
+			url += "api/update/card?id=";
+			url += id;
+			httpWrapper.HttpRequest(url);
 		}
-		cnt++;
+		else {
+			printf("Sorry... I don't you.\n");
+		}
+
+		// カードが離れるまで待つ
+		while (1) {
+			if (felica.GetResource(IDm, PMm, 100) < 0) break;
+			if (pIDm == IDm && pPMm == PMm) continue;
+		}
+
+		pIDm = IDm;
+		pPMm = PMm;
+
+		// 誤爆防止のために1秒ほどインターバル
+		_sleep(1000);
+	}
+}
+
+// 新しいカードの登録
+void registerNewCard() {
+	// IDを確認
+	char buf[256];
+	printf("Tell me your ID : ");
+	scanf("%s", buf);
+
+	string id = buf;
+
+	printf("Touch your card\n");
+
+	// カードタッチがあるまで待つ
+	string IDm, PMm;
+	while (felica.GetResource(IDm, PMm, 100) < 0) continue;
+
+	// 登録処理
+	cardManager.BindIdToCard(id, IDm, PMm);
+
+	printf("Complete! Welcome to our labo, %s!\n", id.c_str());
+}
+
+int main(int argc, char *argv[])
+{
+	cardManager.Load(CARD_DATA_PATH);
+
+	if (felica.Initialize() < 0) {
+		printf("Can't initialize Felica.\n");
+		return -1;
+	}
+
+	// コマンドライン引数に"reg"とあればカード登録へ
+	if (argc == 1) {
+		waitCardTouch();
+	}
+	else if (strcmp(argv[1], "reg")) {
+		registerNewCard();
+	}
+	else {
+		waitCardTouch();
+	}
+
+	if (felica.Dispose() < 0) {
+		printf("Can't dispose Felica.\n");
+		return -1;
 	}
 
 	return 0;
-}
-
-int main(void)
-{
-	if (!initialize_library()) {
-		fprintf(stderr, "Can't initialize library.\n");
-		return EXIT_FAILURE;
-	}
-	printf("Complete initialize_library\r\n");
-
-	if (!open_reader_writer_auto()) {
-		fprintf(stderr, "Can't open reader writer.\n");
-		return EXIT_FAILURE;
-	}
-	printf("Complete open_reader_writer_auto\r\n");
-
-	main_loop();
-
-	if (!close_reader_writer()) {
-		fprintf(stderr, "Can't close reader writer.\n");
-		return EXIT_FAILURE;
-	}
-
-	if (!dispose_library()) {
-		fprintf(stderr, "Can't dispose library.\n");
-		return EXIT_FAILURE;
-	}
-
-	return EXIT_SUCCESS;
-}
-
-void error_routine(void) {
-	enumernation_felica_error_type felica_error_type;
-	enumernation_rw_error_type rw_error_type;
-	get_last_error_types(&felica_error_type, &rw_error_type);
-	printf("felica_error_type: %d\n", felica_error_type);
-	printf("rw_error_type: %d\n", rw_error_type);
-
-	close_reader_writer();
-	dispose_library();
-}
-
-void print_vector(char* title, unsigned char* vector, int length) {
-	if (title != NULL) {
-		fprintf(stdout, "%s ", title);
-	}
-
-	int i;
-	for (i = 0; i < length - 1; i++) {
-		fprintf(stdout, "%02x ", vector[i]);
-	}
-	fprintf(stdout, "%02x", vector[length - 1]);
-	fprintf(stdout, "\n");
 }

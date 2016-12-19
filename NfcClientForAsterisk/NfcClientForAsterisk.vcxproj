@@ -146,10 +146,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FelicaWrapper.cpp" />
+    <ClCompile Include="HttpWrapper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="CardManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config.h" />
     <ClInclude Include="FelicaWrapper.h" />
+    <ClInclude Include="CardManager.h" />
+    <ClInclude Include="HttpWrapper.h" />
+    <ClInclude Include="HTTP\http.h" />
+    <ClInclude Include="HTTP\socket.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
