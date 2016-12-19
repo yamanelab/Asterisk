@@ -29,7 +29,7 @@ void waitCardTouch() {
 		if (id != "") {
 			printf("Hi, %s\n", id.c_str());
 			string url = ASTERISK_URL;
-			url += "api/update/card?id=";
+			url += "api/update/nfc.php?id=";
 			url += id;
 			httpWrapper.HttpRequest(url);
 		}
