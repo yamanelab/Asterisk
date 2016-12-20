@@ -4,8 +4,10 @@
         <link rel="stylesheet" href="index.css" />      
     </head>
     <body>
+        <br>
+
         <div id="header">
-            <span><f1>Members</f1></span>
+            <span><f1><img src="./logo/logo_full" width="350" height="60"></f1></span>
         </div>
 
         <table id="member" class="member-table">
