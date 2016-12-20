@@ -30,7 +30,7 @@ function getMemberBox($member) {
     } else {
         echo "\t\t<div class=\"member-holder non-update\">\n";
     }
-    if ($member->class == normal) {
+    if ($member->class == "normal") {
         echo "\t\t\t<div class=\"member-view ".$member->status."-color\" >\n";
     } else {
         echo "\t\t\t<div class=\"member-view ".$member->status."-status ".$member->class."-class\" >\n";

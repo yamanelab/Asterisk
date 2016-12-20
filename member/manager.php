@@ -3,6 +3,7 @@
 require_once('../model.php');
 require_once('./login_manager.php');
 
+date_default_timezone_set('Asia/Tokyo');
 
 $manager = new LoginManager();
 if(!$manager->isLogined()) {
@@ -13,7 +14,7 @@ if(!$manager->isLogined()) {
 
 // POST処理が来たときは更新処理
 if(isset($_POST['id'])) {
-	
+
 	$model = new Model();
 
 	if(isset($_POST['add'])) {
@@ -59,7 +60,7 @@ if(isset($_POST['id'])) {
 		$m = $model->getMemberDetail($id);
 echo <<< EOT
 		<tr> <form action="manager.php", method="post">
-		<td>$m->id</td>
+		<td><input type="hidden" name="id" value="$m->id"></input>$m->id</td>
 		<td><input type="text" name="name" value="$m->name"></td>
 		<td><input type="text" name="image" value="$m->image"></td>
 		<td><input type="text" name="comment" value="$m->comment"></td>
