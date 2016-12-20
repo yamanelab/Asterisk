@@ -1,0 +1,123 @@
+* {
+  -ms-user-select: none;
+  -moz-user-select:none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* header */
+#header {
+  text-align: center;
+  height: 60px;
+}
+#header > span {
+  line-height: 60px;
+  font-size: xx-large;
+}
+
+/* footer */
+#footer {
+  text-align: center;
+  height: 60px;
+}
+#footer > span {
+  line-height: 60px;
+  font-size: large;
+}
+
+/* table */
+.member-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* holder */
+.member-holder {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+  padding: 0px;
+}
+
+/* view */
+.member-view {
+  width: 180px;
+  height: 100px;
+  text-align: center;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* state & field */
+.member-state {
+  margin: 0px;
+  height: 25px;
+  text-align: center;
+}
+.member-state > span {
+  line-height: 25px;
+}
+.member-field {
+  margin: 0px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  height: 70px;
+  width: 170px;
+  text-align: center;
+  background-color: white;
+  -moz-border-bottom-left-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.member-field > img {
+  margin-top: 5px;
+}
+.member-info > span {
+  line-height: 25px;
+  font-size: small;
+}
+
+/* state color */
+.lab-color {
+  background-color: #00CC00;
+}
+.campus-color {
+  background-color: #FF8C00;
+}
+.home-color {
+  background-color: #A9A9A9;
+}
+
+/* text color for gold or silver class */
+.lab-status {
+  color: #00A000;
+}
+.campus-status {
+  color: #AA3300;
+}
+.home-status {
+  color: #888888;
+}
+
+/* class color */
+.gold-class {
+  background: linear-gradient(to bottom right, #F7DE05, #DA8E00, #EDAC06, #F7DE05, #ECB802, #DAAF08, #B67B03);
+}
+.silver-class {
+  background: linear-gradient(to bottom right, #E8E8E8, #A5A5A5, #BABAC2, #E8E8E8, #A5A5A5, #BABAC2);
+}
+
+/* long absence */
+.non-update > .member-view {
+  color: #DC143C;
+}

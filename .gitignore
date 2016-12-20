@@ -1,0 +1,4 @@
+member_data.json
+slack_bot/slack.json
+data/*
+!.gitkeep
