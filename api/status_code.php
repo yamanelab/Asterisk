@@ -9,6 +9,13 @@
  *	@return {"status_code":"status_name", ... }
  */
 
-echo "{\"home\":\"home\",\"lab\":\"lab\",\"campus\":\"campus\"}";
+$status = array(
+	"home" => "home",
+	"lab" => "lab",
+	"campus" => "campus"
+	);
+
+header('Content-type: application/json');
+echo json_encode($status, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
 ?>
